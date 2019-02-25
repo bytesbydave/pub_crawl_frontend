@@ -5,6 +5,11 @@ import StreamEdit from './streams/StreamEdit';
 import StreamDelete from './streams/StreamDelete';
 import StreamShow from './streams/StreamShow';
 import StreamList from './streams/StreamList';
+import CrawlList from './crawls/CrawlList';
+import CrawlCreate from './crawls/CrawlCreate';
+import CrawlEdit from './crawls/CrawlEdit';
+import CrawlDelete from './crawls/CrawlDelete';
+import CrawlShow from './crawls/CrawlShow';
 import Header from './Header';
 import history from '../history';
 
@@ -15,7 +20,13 @@ const App = () => {
         <div>
           <Header />
           <Switch>
-            <Route path="/" exact component={StreamList} />
+            <Route path="/" exact component={CrawlList} />
+            <Route path="/crawls/new" component={CrawlCreate} />
+            <Route path="/crawls/edit/:id" component={CrawlEdit} />
+            <Route path="/crawls/delete/:id" component={CrawlDelete} />
+            <Route path="/crawls/:id" component={CrawlShow} />
+
+            <Route path="/streams" component={StreamList} />
             <Route path="/streams/new" component={StreamCreate} />
             <Route path="/streams/edit/:id" component={StreamEdit} />
             <Route path="/streams/delete/:id" component={StreamDelete} />
