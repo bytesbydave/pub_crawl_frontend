@@ -69,9 +69,10 @@ export const fetchCrawl = id => async dispatch => {
 export const createCrawl = formValues => async (dispatch, getState) => {
   const { userId } = getState().auth;
   const response = await crawls.post('/crawls', { ...formValues, userId });
+  const id = response.data.id
 
   dispatch({ type: CREATE_CRAWL, payload: response.data });
-  history.push('/');
+  history.push(`/crawls/${id}/add_locations/`);
 };
 
 export const editCrawl = (id, formValues) => async dispatch => {
