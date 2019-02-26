@@ -1,4 +1,5 @@
 import streams from '../apis/streams';
+import crawls from '../apis/crawls';
 import history from '../history';
 import {
   SIGN_IN,
@@ -7,7 +8,12 @@ import {
   FETCH_STREAMS,
   FETCH_STREAM,
   DELETE_STREAM,
-  EDIT_STREAM
+  EDIT_STREAM,
+  CREATE_CRAWL,
+  FETCH_CRAWLS,
+  FETCH_CRAWL,
+  DELETE_CRAWL,
+  EDIT_CRAWL
 } from './types';
 
 export const signIn = userId => {
@@ -21,6 +27,40 @@ export const signOut = () => {
   return {
     type: SIGN_OUT
   };
+};
+
+export const fetchCrawls = () => async dispatch => {
+  const response = await crawls.get('/crawls');
+
+  dispatch({ type: FETCH_CRAWLS, payload: response.data });
+};
+
+export const fetchCrawl = id => async dispatch => {
+  const response = await crawls.get(`/crawls/${id}`);
+
+  dispatch({ type: FETCH_CRAWL, payload: response.data });
+};
+
+export const createCrawl = formValues => async (dispatch, getState) => {
+  const { userId } = getState().auth;
+  const response = await crawls.post('/crawls', { ...formValues, userId });
+
+  dispatch({ type: CREATE_CRAWL, payload: response.data });
+  history.push('/');
+};
+
+export const editCrawl = (id, formValues) => async dispatch => {
+  const response = await crawls.patch(`/crawls/${id}`, formValues);
+
+  dispatch({ type: EDIT_CRAWL, payload: response.data });
+  history.push('/');
+};
+
+export const deleteCrawl = id => async dispatch => {
+  await crawls.delete(`/crawls/${id}`);
+
+  dispatch({ type: DELETE_CRAWL, payload: id });
+  history.push('/')
 };
 
 export const createStream = formValues => async (dispatch, getState) => {
