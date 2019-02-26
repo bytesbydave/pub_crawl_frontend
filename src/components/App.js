@@ -10,6 +10,8 @@ import CrawlCreate from './crawls/CrawlCreate';
 import CrawlEdit from './crawls/CrawlEdit';
 import CrawlDelete from './crawls/CrawlDelete';
 import CrawlShow from './crawls/CrawlShow';
+import CrawlAddLocations from './crawls/CrawlAddLocations';
+import LocationShow from './locations/LocationShow';
 import Header from './Header';
 import history from '../history';
 
@@ -24,7 +26,9 @@ const App = () => {
             <Route path="/crawls/new" component={CrawlCreate} />
             <Route path="/crawls/edit/:id" component={CrawlEdit} />
             <Route path="/crawls/delete/:id" component={CrawlDelete} />
-            <Route path="/crawls/:id" component={CrawlShow} />
+            <Route path="/crawls/:id" exact component={CrawlShow} />
+            <Route path="/crawls/:id/add_locations" component={CrawlAddLocations} />
+            <Route path="/locations/:id" component={LocationShow} />
 
             <Route path="/streams" component={StreamList} />
             <Route path="/streams/new" component={StreamCreate} />
