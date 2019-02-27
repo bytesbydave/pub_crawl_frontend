@@ -1,7 +1,3 @@
-cd ..<img src="src/crawlr.png" width="200" height="150" title="Crawlr Logo">
-
----
-
 # Crawlr
 
 Crawlr is a Social Gathering Platform that allows users to create and join pub crawls in the area. This application uses the Yelp API to locate bars in the New York City area, with roll-outs to other geographical locations in the future. This project uses React on the frontend and Redux to handle forms and requests. Designs are done with Semantic UI and custom CSS. The purpose of this application was to gain familiarity with React and Redux and connecting it with a backend server. Authentication is done with Google OAuth. 
