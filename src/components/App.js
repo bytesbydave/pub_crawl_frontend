@@ -30,7 +30,7 @@ const App = () => {
             <Route path="/crawls/:id/add_locations" component={CrawlAddLocations} />
             <Route path="/locations/:id" component={LocationShow} />
 
-            <Route path="/streams" component={StreamList} />
+            <Route path="/streams" exact component={StreamList} />
             <Route path="/streams/new" component={StreamCreate} />
             <Route path="/streams/edit/:id" component={StreamEdit} />
             <Route path="/streams/delete/:id" component={StreamDelete} />
