@@ -1,68 +1,57 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+cd ..<img src="src/crawlr.png" width="200" height="150" title="Crawlr Logo">
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+# Crawlr
 
-### `npm start`
+Crawlr is a Social Gathering Platform that allows users to create and join pub crawls in the area. This application uses the Yelp API to locate bars in the New York City area, with roll-outs to other geographical locations in the future. This project uses React on the frontend and Redux to handle forms and requests. Designs are done with Semantic UI and custom CSS. The purpose of this application was to gain familiarity with React and Redux and connecting it with a backend server. Authentication is done with Google OAuth. 
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+View the github for the backend [here](https://github.com/dvdlin214/pub-crawl-api)
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+View the main github [here](https://github.com/dvdlin214/pub_crawl)
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+These instructions will get you a copy of the project up and running on your local machine for development. 
 
-### `npm run build`
+### Installing
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To get started with the frontend portion of the application, run the following to install on your local environment
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+In the terminal run:
+```
+git clone https://github.com/dvdlin214/pub_crawl_frontend.git
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Install packages:
+```
+npm install
+```
 
-### `npm run eject`
+Change API location:
+```
+in the API directory, change the base URL to http://localhost:3001/
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Change Yelp API
+```
+Get a Yelp API key from [here](https://www.yelp.com/developers)
+Replace process.env.REACT_APP_YELP_API_KEY with the API Key
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Start the application
+```
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Built With
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### NPM Packages
+- Create-React-App
+- React-Redux
+- Axios
+- Redux-form
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### APIs
+- Yelp API
+- Rails API
