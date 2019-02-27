@@ -46,10 +46,9 @@ export const fetchLocation = id => async dispatch => {
   dispatch({ type: FETCH_LOCATION, payload: response.data });
 };
 
-export const createLocation = formValues => async (dispatch, getState) => {
-  const { crawl_id } = getState().crawls
-  console.log(crawl_id)
-  const response = await locations.get('/locations', { ...formValues, crawl_id })
+export const createLocation = (crawlId, bar_name) => async (dispatch) => {
+  const formValues = {name: bar_name, crawl_id: crawlId}
+  const response = await locations.post('/locations', { ...formValues })
 
   dispatch({ type: CREATE_LOCATION, payload: response.data })
 }
