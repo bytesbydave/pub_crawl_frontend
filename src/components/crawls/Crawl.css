@@ -1,0 +1,25 @@
+.screen-container {
+  min-height: 100vh;
+  padding-top: 80px;
+  padding-bottom: 50px;
+}
+
+.ui.cards {
+  justify-content: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.ui.cards > .card {
+  width: 350px;
+}
+
+@media (max-width: 768px) {
+  .ui.cards > .card {
+    width: 290px;
+  }
+
+  .screen-container {
+    padding-top: 40px;
+  }
+}
