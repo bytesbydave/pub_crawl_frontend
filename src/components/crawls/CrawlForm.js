@@ -19,7 +19,11 @@ class CrawlForm extends React.Component {
     return (
       <div className={className}>
         <label>{formProps.label}</label>
-        <input {...formProps.input} autoComplete="off" />
+        <textarea
+          {...formProps.input}
+          autoComplete="off"
+          rows={formProps.rows}
+        />
       </div>
     );
   };
@@ -38,12 +42,15 @@ class CrawlForm extends React.Component {
           name="name"
           component={this.renderInput}
           label="Enter Name of Your Crawl"
+          rows="1"
         />
         <Field
           name="description"
           component={this.renderInput}
           label="Enter description"
+          rows="5"
         />
+
         <button className="ui button primary">Submit</button>
       </form>
     );
