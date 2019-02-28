@@ -46,12 +46,19 @@ export const fetchLocation = id => async dispatch => {
   dispatch({ type: FETCH_LOCATION, payload: response.data });
 };
 
-export const createLocation = (crawlId, bar_name) => async (dispatch) => {
-  const formValues = {name: bar_name, crawl_id: crawlId}
+export const createLocation = (crawlId, bar_name, imageUrl, website, phone, rating, yelpId, category, city, address) => async (dispatch) => {
+  
+  const formValues = {name: bar_name, crawl_id: crawlId, image_url: imageUrl, website, phone, rating, yelp_id: yelpId, category: category[0].title, city, address}
   const response = await locations.post('/locations', { ...formValues })
 
   dispatch({ type: CREATE_LOCATION, payload: response.data })
 }
+
+export const deleteLocation = id => async dispatch => {
+  await locations.delete(`/locations/${id}`);
+
+  dispatch({ type: DELETE_LOCATION, payload: id });
+};
 
 export const fetchCrawls = () => async dispatch => {
   const response = await crawls.get('/crawls');
@@ -85,7 +92,7 @@ export const deleteCrawl = id => async dispatch => {
   await crawls.delete(`/crawls/${id}`);
 
   dispatch({ type: DELETE_CRAWL, payload: id });
-  history.push('/');
+  history.push('/crawls');
 };
 
 export const createStream = formValues => async (dispatch, getState) => {
