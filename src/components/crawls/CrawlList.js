@@ -2,8 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchCrawls } from '../../actions';
+import faker from 'faker';
+import './Crawl.css';
 
 class CrawlList extends React.Component {
+
   componentDidMount() {
     this.props.fetchCrawls();
   }
@@ -29,14 +32,28 @@ class CrawlList extends React.Component {
   renderList() {
     return this.props.crawls.map(crawl => {
       return (
-        <div className="crawl" key={crawl.id}>
-          {this.renderAdmin(crawl)}
-          <i className="beer icon" />
+        <div className="card" key={crawl.id}>
+          <Link to={`/crawls/${crawl.id}`} className="image">
+            <img src={faker.image.nightlife()} alt="night-out" />
+          </Link>
           <div className="content">
-            <Link to={`/crawls/${crawl.id}`} className="header">
-              {crawl.name}
-            </Link>
+            <div className="header">
+              <i className="beer icon" />
+              <Link to={`/crawls/${crawl.id}`} className="header">
+                {crawl.name}
+              </Link>
+            </div>
+            <div className="meta">
+              <p>Friends</p>
+            </div>
             <div className="description">{crawl.description}</div>
+          </div>
+          <div className="extra content">
+            {this.renderAdmin(crawl)}
+            <span>
+              <i className="user icon" />
+              25 People Attending
+            </span>
           </div>
         </div>
       );
@@ -58,9 +75,11 @@ class CrawlList extends React.Component {
   render() {
     return (
       <div>
-        <h2>List of Pubcrawls</h2>
-        <div>{this.renderList()}</div>
+        <div className="ui container screen-container">
+          <h1 className="ui center aligned header crawl-title">List of Pubcrawls</h1>
+          <div className="ui link cards">{this.renderList()}</div>
         {this.renderCreate()}
+        </div>
       </div>
     );
   }
