@@ -18,6 +18,11 @@
   padding-left: 30px;
 }
 
+.crawl-image {
+  height: 200px;
+  overflow: hidden;
+}
+
 @media (max-width: 768px) {
   .ui.cards > .card {
     width: 290px;
