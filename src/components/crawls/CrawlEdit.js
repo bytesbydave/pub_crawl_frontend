@@ -18,12 +18,14 @@ class CrawlEdit extends React.Component {
       return <div className="ui container screen-container">Loading...</div>;
     }
     return (
-      <div>
-        <h2>Edit Crawl</h2>
-        <CrawlForm
-          initialValues={_.pick(this.props.crawl, 'name', 'description')}
-          onSubmit={this.onSubmit}
-        />
+      <div className="ui container screen-container">
+        <div className="ui raised very padded text container segment form-contain">
+          <h1 className="ui center aligned header crawl-title">Edit Crawl</h1>
+          <CrawlForm
+            initialValues={_.pick(this.props.crawl, 'name', 'description')}
+            onSubmit={this.onSubmit}
+          />
+        </div>
       </div>
     );
   }
