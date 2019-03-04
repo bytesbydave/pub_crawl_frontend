@@ -33,8 +33,8 @@ class CrawlList extends React.Component {
     return this.props.crawls.map(crawl => {
       return (
         <div className="card" key={crawl.id}>
-          <Link to={`/crawls/${crawl.id}`} className="image">
-            <img src={faker.image.nightlife()} alt="night-out" />
+          <Link to={`/crawls/${crawl.id}`} className="image crawl-image">
+            <img src={crawl.image} alt="night-out" />
           </Link>
           <div className="content">
             <div className="header">
