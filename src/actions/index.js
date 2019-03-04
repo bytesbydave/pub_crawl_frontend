@@ -85,7 +85,7 @@ export const editCrawl = (id, formValues) => async dispatch => {
   const response = await crawls.patch(`/crawls/${id}`, formValues);
 
   dispatch({ type: EDIT_CRAWL, payload: response.data });
-  history.push('/');
+  history.push(`/crawls/${id}/add_locations/`);
 };
 
 export const deleteCrawl = id => async dispatch => {
