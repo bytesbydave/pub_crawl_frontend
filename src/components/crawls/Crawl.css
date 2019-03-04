@@ -14,6 +14,10 @@
   width: 350px;
 }
 
+.finished-btn {
+  padding-left: 30px;
+}
+
 @media (max-width: 768px) {
   .ui.cards > .card {
     width: 290px;
