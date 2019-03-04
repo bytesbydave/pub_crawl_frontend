@@ -22,10 +22,17 @@ class CrawlAddLocation extends React.Component {
       return (
         <div className="item" key={location.id}>
           <div className="image">
-            <img src={location.image_url} alt="bar" />
+            Remove
           </div>
           <div className="content">
-            <a className="header" href={location.website} target="_blank" rel="noopener noreferrer">{location.name}</a>
+            <a
+              className="header"
+              href={location.website}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {location.name}
+            </a>
             <div className="meta">
               <span className="cinema">{location.address}</span>
             </div>
@@ -45,6 +52,18 @@ class CrawlAddLocation extends React.Component {
         </div>
       );
     });
+  }
+
+  renderListHeading() {
+    if(this.props.locations.length <= 0) {
+      return (
+        <h2>No Bars on Your List</h2>
+      )
+    } else {
+      return (
+        <h2>Bars Currently on Your List</h2>
+      )
+    }
   }
 
   onTermSubmit = async term => {
@@ -67,11 +86,21 @@ class CrawlAddLocation extends React.Component {
       <div className="ui container screen-container">
         <h1>Add some bars to {this.props.crawl.name}</h1>
         <SearchBar onFormSubmit={this.onTermSubmit} />
-        <LocationList
-          locations={this.state.locations}
-          crawl={this.props.crawl.id}
-        />
-        <div className="ui divided items">{this.renderList()}</div>
+        <div className="ui segnemt">
+          <div className="ui two column very relaxed grid">
+            <div className="column">
+              <LocationList
+                locations={this.state.locations}
+                crawl={this.props.crawl.id}
+                addedLocations={this.props.locations}
+              />
+            </div>
+            <div className="column">
+              {this.renderListHeading()}
+              <div className="ui divided items">{this.renderList()}</div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
