@@ -15,7 +15,7 @@ class CrawlEdit extends React.Component {
 
   render() {
     if (!this.props.crawl) {
-      return <div>Loading...</div>;
+      return <div className="ui container screen-container">Loading...</div>;
     }
     return (
       <div>

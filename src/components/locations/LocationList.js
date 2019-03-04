@@ -33,6 +33,8 @@ class LocationList extends React.Component {
             />
           </div>
         );
+      } else {
+        return <div key={location.id} />;
       }
     });
   }

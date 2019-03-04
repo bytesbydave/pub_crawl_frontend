@@ -9,7 +9,7 @@ class LocationShow extends React.Component {
 
   render() {
     if (!this.props.location) {
-      return <div>Loading...</div>;
+      return <div className="ui container screen-container">Loading...</div>;
     }
     return (
       <div>
