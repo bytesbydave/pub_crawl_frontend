@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCrawl, fetchLocations, deleteLocation } from '../../actions';
+import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import LocationList from '../locations/LocationList';
 import yelp from '../../apis/yelp';
@@ -19,16 +20,16 @@ class CrawlAddLocation extends React.Component {
 
   renderList() {
     return this.props.locations.map(location => {
-      const id = location.id
+      const id = location.id;
       return (
         <div className="item" key={location.id}>
           <div className="image">
-          <button
-            onClick={() => this.props.deleteLocation(id)}
-            className="ui button negative"
-          >
-            Delete
-          </button>
+            <button
+              onClick={() => this.props.deleteLocation(id)}
+              className="ui button negative"
+            >
+              Delete
+            </button>
           </div>
           <div className="content">
             <a
@@ -61,14 +62,21 @@ class CrawlAddLocation extends React.Component {
   }
 
   renderListHeading() {
-    if(this.props.locations.length <= 0) {
-      return (
-        <h2>No Bars on Your List</h2>
-      )
+    if (this.props.locations.length <= 0) {
+      return <h2>No Bars on Your List</h2>;
     } else {
       return (
-        <h2>Bars Currently on Your List</h2>
-      )
+        <div>
+          <h2>
+            Bars Currently on Your List
+            <span className="finished-btn">
+              <Link to="/crawls" className="ui primary button">
+                Finished
+              </Link>
+            </span>
+          </h2>
+        </div>
+      );
     }
   }
 
