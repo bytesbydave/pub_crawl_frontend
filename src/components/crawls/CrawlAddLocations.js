@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchCrawl, fetchLocations } from '../../actions';
+import { fetchCrawl, fetchLocations, deleteLocation } from '../../actions';
 import SearchBar from './SearchBar';
 import LocationList from '../locations/LocationList';
 import yelp from '../../apis/yelp';
@@ -19,10 +19,16 @@ class CrawlAddLocation extends React.Component {
 
   renderList() {
     return this.props.locations.map(location => {
+      const id = location.id
       return (
         <div className="item" key={location.id}>
           <div className="image">
-            Remove
+          <button
+            onClick={() => this.props.deleteLocation(id)}
+            className="ui button negative"
+          >
+            Delete
+          </button>
           </div>
           <div className="content">
             <a
@@ -80,7 +86,7 @@ class CrawlAddLocation extends React.Component {
 
   render() {
     if (!this.props.crawl) {
-      return <div>Loading...</div>;
+      return <div className="ui container screen-container">Loading...</div>;
     }
     return (
       <div className="ui container screen-container">
@@ -115,5 +121,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { fetchCrawl, fetchLocations }
+  { fetchCrawl, fetchLocations, deleteLocation }
 )(CrawlAddLocation);
