@@ -1,8 +1,9 @@
 import React from 'react';
-import './Application.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { signIn } from '../../actions';
+import 'semantic-ui-css/semantic.min.css';
+import './Application.css';
 
 class Home extends React.Component {
   renderAuthButton() {
@@ -23,7 +24,7 @@ class Home extends React.Component {
             View Pub Crawls <i className="right arrow icon" />
           </Link>
         </div>
-      )
+      );
     }
   }
 
@@ -59,11 +60,11 @@ class Home extends React.Component {
               <div className="six wide right floated column">
                 <img
                   src="https://www.verywellmind.com/thmb/JAK__6BPSswnQzYuOLxWLzfgCzA=/400x250/filters:no_upscale():max_bytes(150000):strip_icc()/beer-drinkers-569fe5fa5f9b58eba4add5ca.jpg"
-                  className="ui large bordered rounded image" alt="people-drinking"
+                  className="ui large bordered rounded image"
+                  alt="people-drinking"
                 />
               </div>
             </div>
-
           </div>
         </div>
 
