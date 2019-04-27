@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchCrawl, fetchLocations, deleteLocation } from '../../actions';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
-import LocationList from '../locations/LocationList';
+import LocationList from './LocationList';
 import yelp from '../../apis/yelp';
 
 class CrawlAddLocation extends React.Component {
