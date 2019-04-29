@@ -1,35 +1,49 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { requestBars, setSearchField } from '../../actions';
 
 class SearchBar extends React.Component {
-  state = { term: '' };
-
-  onInputChange = e => {
-    this.setState({ term: e.target.value });
-  };
-
-  onFormSubmit = e => {
-    e.preventDefault();
-    this.props.onFormSubmit(this.state.term);
-  };
-
   render() {
+    const { searchField, onSearchChange, onTermSubmit } = this.props;
     return (
       <div className="ui segment">
-        <form onSubmit={this.onFormSubmit} className="ui form">
+        <div className="ui form">
           <div className="field">
             <label>Search for a Bar!</label>
             <input
               type="text"
-              value={this.state.term}
-              onChange={this.onInputChange}
+              value={searchField}
+              onChange={onSearchChange}
               required
             />
           </div>
-          <button className="ui primary button">Search!</button>
-        </form>
+          <button
+            onClick={onTermSubmit}
+            value={searchField}
+            className="ui primary button"
+          >
+            Search!
+          </button>
+        </div>
       </div>
     );
   }
 }
 
-export default SearchBar;
+const mapStateToProps = state => {
+  return {
+    searchField: state.searchBar.searchField
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onTermSubmit: event => dispatch(requestBars(event.target.value)),
+    onSearchChange: event => dispatch(setSearchField(event.target.value))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SearchBar);
