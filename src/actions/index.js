@@ -1,6 +1,7 @@
 import streams from '../apis/streams';
 import crawls from '../apis/crawls';
 import locations from '../apis/locations';
+import yelp from '../apis/yelp';
 import history from '../history';
 import {
   SIGN_IN,
@@ -18,7 +19,11 @@ import {
   CREATE_LOCATION,
   FETCH_LOCATIONS,
   FETCH_LOCATION,
-  DELETE_LOCATION
+  DELETE_LOCATION,
+  CHANGE_SEARCH_FIELD,
+  REQUEST_YELP_PENDING,
+  REQUEST_YELP_SUCCESS,
+  REQUEST_YELP_FAILED
 } from './types';
 
 export const signIn = userId => {
@@ -34,6 +39,30 @@ export const signOut = () => {
   };
 };
 
+export const setSearchField = text => {
+  return {
+    type: CHANGE_SEARCH_FIELD,
+    payload: text
+  };
+};
+
+export const requestBars = term => async dispatch => {
+  dispatch({ type: REQUEST_YELP_PENDING });
+  try {
+    const response = await yelp.get('/businesses/search', {
+      params: {
+        term: term,
+        location: 'New York City',
+        limit: 10,
+        categories: 'bars'
+      }
+    });
+    dispatch({ type: REQUEST_YELP_SUCCESS, payload: response.data.businesses });
+  } catch (err) {
+    dispatch({ type: REQUEST_YELP_FAILED, payload: err });
+  }
+};
+
 export const fetchLocations = id => async dispatch => {
   const response = await crawls.get(`/crawls/${id}/locations`);
 
@@ -46,13 +75,34 @@ export const fetchLocation = id => async dispatch => {
   dispatch({ type: FETCH_LOCATION, payload: response.data });
 };
 
-export const createLocation = (crawlId, bar_name, imageUrl, website, phone, rating, yelpId, category, city, address) => async (dispatch) => {
-  
-  const formValues = {name: bar_name, crawl_id: crawlId, image_url: imageUrl, website, phone, rating, yelp_id: yelpId, category: category[0].title, city, address}
-  const response = await locations.post('/locations', { ...formValues })
+export const createLocation = (
+  crawlId,
+  bar_name,
+  imageUrl,
+  website,
+  phone,
+  rating,
+  yelpId,
+  category,
+  city,
+  address
+) => async dispatch => {
+  const formValues = {
+    name: bar_name,
+    crawl_id: crawlId,
+    image_url: imageUrl,
+    website,
+    phone,
+    rating,
+    yelp_id: yelpId,
+    category: category[0].title,
+    city,
+    address
+  };
+  const response = await locations.post('/locations', { ...formValues });
 
-  dispatch({ type: CREATE_LOCATION, payload: response.data })
-}
+  dispatch({ type: CREATE_LOCATION, payload: response.data });
+};
 
 export const deleteLocation = id => async dispatch => {
   await locations.delete(`/locations/${id}`);
@@ -75,17 +125,17 @@ export const fetchCrawl = id => async dispatch => {
 export const createCrawl = formValues => async (dispatch, getState) => {
   const { userId } = getState().auth;
   const response = await crawls.post('/crawls', { ...formValues, userId });
-  const id = response.data.id
+  const id = response.data.id;
 
   dispatch({ type: CREATE_CRAWL, payload: response.data });
-  history.push(`/crawls/${id}/add_locations/`);
+  history.push(`/crawls/${id}/`);
 };
 
 export const editCrawl = (id, formValues) => async dispatch => {
   const response = await crawls.patch(`/crawls/${id}`, formValues);
 
   dispatch({ type: EDIT_CRAWL, payload: response.data });
-  history.push(`/crawls/${id}/add_locations/`);
+  history.push(`/crawls/${id}/`);
 };
 
 export const deleteCrawl = id => async dispatch => {
