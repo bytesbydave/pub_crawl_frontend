@@ -2,11 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchCrawls } from '../../actions';
-import faker from 'faker';
 import './Crawl.css';
 
 class CrawlList extends React.Component {
-
   componentDidMount() {
     this.props.fetchCrawls();
   }
@@ -76,9 +74,11 @@ class CrawlList extends React.Component {
     return (
       <div>
         <div className="ui container screen-container">
-          <h1 className="ui center aligned header crawl-title">List of Pubcrawls</h1>
+          <h1 className="ui center aligned header crawl-title">
+            List of Pubcrawls
+          </h1>
           <div className="ui link cards">{this.renderList()}</div>
-        {this.renderCreate()}
+          {this.renderCreate()}
         </div>
       </div>
     );
