@@ -75,33 +75,22 @@ export const fetchLocation = id => async dispatch => {
   dispatch({ type: FETCH_LOCATION, payload: response.data });
 };
 
-export const createLocation = (
-  crawlId,
-  bar_name,
-  imageUrl,
-  website,
-  phone,
-  rating,
-  yelpId,
-  category,
-  city,
-  address
-) => async dispatch => {
-  const formValues = {
-    name: bar_name,
-    crawl_id: crawlId,
-    image_url: imageUrl,
-    website,
-    phone,
-    rating,
-    yelp_id: yelpId,
-    category: category[0].title,
-    city,
-    address
+export const createLocation = (id, formValues) => async dispatch => {
+  try {
+  const location = {
+    ...formValues,
+    crawl_id: id,
+    website: formValues.url,
+    yelp_id: formValues.id,
+    address: formValues.location.address1,
+    city: formValues.location.city,
+    category: formValues.categories[0].title
   };
-  const response = await locations.post('/locations', { ...formValues });
-
-  dispatch({ type: CREATE_LOCATION, payload: response.data });
+    const response = await locations.post('/locations', { location });
+    dispatch({ type: CREATE_LOCATION, payload: response.data });
+  } catch(error) {
+    console.log(error)
+  }
 };
 
 export const deleteLocation = id => async dispatch => {
@@ -128,7 +117,7 @@ export const createCrawl = formValues => async (dispatch, getState) => {
   const id = response.data.id;
 
   dispatch({ type: CREATE_CRAWL, payload: response.data });
-  history.push(`/crawls/${id}/`);
+  history.push(`/crawls/${id}/add_location`);
 };
 
 export const editCrawl = (id, formValues) => async dispatch => {
