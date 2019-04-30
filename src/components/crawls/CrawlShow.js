@@ -10,6 +10,47 @@ class CrawlShow extends React.Component {
     this.props.fetchLocations(this.props.match.params.id);
   }
 
+  showAdmin() {
+    const { location } = this.props;
+    if (this.props.isSignedIn && this.props.userId === this.props.crawl.userId) {
+      return (
+        <div className="extra content">
+          <div className="ui two buttons">
+            <a
+              className="ui basic green button"
+              href={location.website}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              View Site
+            </a>
+            <div
+              className="ui basic red button"
+              onClick={() => this.props.deleteLocation(location.id)}
+            >
+              Remove
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="extra content">
+          <div className="ui two buttons">
+            <a
+              className="ui basic green button"
+              href={location.website}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              View Site
+            </a>
+          </div>
+        </div>
+      );
+    }
+  }
+
   renderList() {
     return this.props.locations.map(location => {
       return (
@@ -30,24 +71,7 @@ class CrawlShow extends React.Component {
               </span>
             </div>
           </div>
-          <div className="extra content">
-            <div className="ui two buttons">
-              <a
-                className="ui basic green button"
-                href={location.website}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                View Site
-              </a>
-              <div
-                className="ui basic red button"
-                onClick={() => this.props.deleteLocation(location.id)}
-              >
-                Remove
-              </div>
-            </div>
-          </div>
+          {this.showAdmin(location)}
         </div>
       );
     });
@@ -56,7 +80,10 @@ class CrawlShow extends React.Component {
   renderBarsSearch() {
     return (
       <div>
-        <BarsDisplay crawl={this.props.crawl} locations={this.props.locations} />
+        <BarsDisplay
+          crawl={this.props.crawl}
+          locations={this.props.locations}
+        />
       </div>
     );
   }
@@ -65,20 +92,34 @@ class CrawlShow extends React.Component {
     if (!this.props.crawl) {
       return <div className="ui container screen-container">Loading...</div>;
     }
-    return (
-      <div className="ui container screen-container">
-        <h1>Pub Crawl Itinerary for {this.props.crawl.name}</h1>
-        <div className="ui cards">{this.renderList()}</div>
-        {this.renderBarsSearch()}
-      </div>
-    );
+    if (
+      this.props.isSignedIn &&
+      this.props.userId === this.props.crawl.userId
+    ) {
+      return (
+        <div className="ui container screen-container">
+          <h1>Pub Crawl Itinerary for {this.props.crawl.name}</h1>
+          <div className="ui cards">{this.renderList()}</div>
+          {this.renderBarsSearch()}
+        </div>
+      );
+    } else {
+      return (
+        <div className="ui container screen-container">
+          <h1>Pub Crawl Itinerary for {this.props.crawl.name}</h1>
+          <div className="ui cards">{this.renderList()}</div>
+        </div>
+      );
+    }
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
     crawl: state.crawls[ownProps.match.params.id],
-    locations: Object.values(state.locations)
+    locations: Object.values(state.locations),
+    isSignedIn: state.auth.isSignedIn,
+    userId: state.auth.userId
   };
 };
 
