@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import 'semantic-ui-css/semantic.min.css';
 
 class BarList extends React.Component {
-  renderBarList() {
+  renderBarList(crawl) {
+    const crawlId = crawl.id
     if (this.props.error) {
       return <div>Error</div>;
     }
@@ -12,12 +13,16 @@ class BarList extends React.Component {
       return <div>Loading</div>;
     } else {
       return this.props.bars.map(bar => {
-        return <BarItem bar={bar} key={bar.id} picture={bar.imageUrl} />;
+        return <BarItem  bar={bar} key={bar.id} picture={bar.imageUrl} crawl={crawlId} />;
       });
     }
   }
   render() {
-    return <div className="ui link cards">{this.renderBarList()}</div>;
+    return (
+      <div className="ui link cards">
+        {this.renderBarList(this.props.crawl)}
+      </div>
+    );
   }
 }
 
