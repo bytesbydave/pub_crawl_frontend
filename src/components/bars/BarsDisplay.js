@@ -8,7 +8,7 @@ class BarsDisplay extends React.Component {
     return (
       <div className="ui container screen-container">
         <SearchBar />
-        <BarsList crawl={this.props.crawl} />
+        <BarsList crawl={this.props.crawl} locations={this.props.locations}/>
       </div>
     );
   }
