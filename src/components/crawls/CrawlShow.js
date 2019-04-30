@@ -10,15 +10,17 @@ class CrawlShow extends React.Component {
     this.props.fetchLocations(this.props.match.params.id);
   }
 
-  showAdmin() {
-    const { location } = this.props;
-    if (this.props.isSignedIn && this.props.userId === this.props.crawl.userId) {
+  showAdmin(website, id) {
+    if (
+      this.props.isSignedIn &&
+      this.props.userId === this.props.crawl.userId
+    ) {
       return (
         <div className="extra content">
           <div className="ui two buttons">
             <a
               className="ui basic green button"
-              href={location.website}
+              href={website}
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -26,7 +28,7 @@ class CrawlShow extends React.Component {
             </a>
             <div
               className="ui basic red button"
-              onClick={() => this.props.deleteLocation(location.id)}
+              onClick={() => this.props.deleteLocation(id)}
             >
               Remove
             </div>
@@ -39,7 +41,7 @@ class CrawlShow extends React.Component {
           <div className="ui two buttons">
             <a
               className="ui basic green button"
-              href={location.website}
+              href={website}
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -71,7 +73,7 @@ class CrawlShow extends React.Component {
               </span>
             </div>
           </div>
-          {this.showAdmin(location)}
+          {this.showAdmin(location.website, location.id)}
         </div>
       );
     });
