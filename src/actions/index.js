@@ -77,19 +77,19 @@ export const fetchLocation = id => async dispatch => {
 
 export const createLocation = (id, formValues) => async dispatch => {
   try {
-  const location = {
-    ...formValues,
-    crawl_id: id,
-    website: formValues.url,
-    yelp_id: formValues.id,
-    address: formValues.location.address1,
-    city: formValues.location.city,
-    category: formValues.categories[0].title
-  };
+    const location = {
+      ...formValues,
+      crawl_id: id,
+      website: formValues.url,
+      yelp_id: formValues.id,
+      address: formValues.location.address1,
+      city: formValues.location.city,
+      category: formValues.categories[0].title
+    };
     const response = await locations.post('/locations', { location });
     dispatch({ type: CREATE_LOCATION, payload: response.data });
-  } catch(error) {
-    console.log(error)
+  } catch (error) {
+    console.log(error);
   }
 };
 
