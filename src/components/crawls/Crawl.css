@@ -23,6 +23,15 @@
   overflow: hidden;
 }
 
+.bar-content {
+  height: 75px;
+  overflow: hidden;
+}
+
+.ui.cards > .card .content img {
+  width: 100px;
+}
+
 @media (max-width: 768px) {
   .ui.cards > .card {
     width: 290px;
