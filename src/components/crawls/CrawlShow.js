@@ -1,7 +1,7 @@
 import React from 'react';
 import BarsDisplay from '../bars/BarsDisplay';
 import { connect } from 'react-redux';
-import { fetchCrawl, fetchLocations } from '../../actions';
+import { fetchCrawl, fetchLocations, deleteLocation } from '../../actions';
 import './Crawl.css';
 
 class CrawlShow extends React.Component {
@@ -13,32 +13,38 @@ class CrawlShow extends React.Component {
   renderList() {
     return this.props.locations.map(location => {
       return (
-        <div className="item" key={location.id}>
-          <div className="image">
-            <img src={location.image_url} alt="bar" />
-          </div>
+        <div className="card" key={location.id}>
           <div className="content">
-            <a
-              className="header"
-              href={location.website}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {location.name}
-            </a>
-            <div className="meta">
-              <span className="cinema">{location.address}</span>
+            <div className="right floated bar-content">
+              <img
+                alt="bar"
+                className="right floated mini ui image bar-mage"
+                src={location.image_url}
+              />
             </div>
-            <div className="meta">
-              <span className="cinema">{location.city}</span>
-            </div>
+            <div className="header">{location.name}</div>
+            <div className="meta">{location.category}</div>
             <div className="description">
-              <p>{location.description}</p>
+              <span>
+                {location.address} {location.city}
+              </span>
             </div>
-            <div className="extra">
-              <div className="ui label">Rating: {location.rating} Stars</div>
-              <div className="ui label">
-                <i className="globe icon" /> {location.category}
+          </div>
+          <div className="extra content">
+            <div className="ui two buttons">
+              <a
+                className="ui basic green button"
+                href={location.website}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                View Site
+              </a>
+              <div
+                className="ui basic red button"
+                onClick={() => this.props.deleteLocation(location.id)}
+              >
+                Remove
               </div>
             </div>
           </div>
@@ -50,7 +56,7 @@ class CrawlShow extends React.Component {
   renderBarsSearch() {
     return (
       <div>
-        <BarsDisplay crawl={this.props.crawl} />
+        <BarsDisplay crawl={this.props.crawl} locations={this.props.locations} />
       </div>
     );
   }
@@ -62,7 +68,7 @@ class CrawlShow extends React.Component {
     return (
       <div className="ui container screen-container">
         <h1>Pub Crawl Itinerary for {this.props.crawl.name}</h1>
-        <div className="ui divided items">{this.renderList()}</div>
+        <div className="ui cards">{this.renderList()}</div>
         {this.renderBarsSearch()}
       </div>
     );
@@ -78,5 +84,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { fetchCrawl, fetchLocations }
+  { fetchCrawl, fetchLocations, deleteLocation }
 )(CrawlShow);
