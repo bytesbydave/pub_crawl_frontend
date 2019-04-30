@@ -6,9 +6,9 @@ import 'semantic-ui-css/semantic.min.css';
 class BarsDisplay extends React.Component {
   render() {
     return (
-      <div>
+      <div className="ui container screen-container">
         <SearchBar />
-        <BarsList />
+        <BarsList crawl={this.props.crawl} />
       </div>
     );
   }
