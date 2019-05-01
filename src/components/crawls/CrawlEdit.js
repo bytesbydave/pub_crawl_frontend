@@ -22,7 +22,7 @@ class CrawlEdit extends React.Component {
         <div className="ui raised very padded text container segment form-contain">
           <h1 className="ui center aligned header crawl-title">Edit Crawl</h1>
           <CrawlForm
-            initialValues={_.pick(this.props.crawl, 'name', 'description')}
+            initialValues={_.pick(this.props.crawl, 'name', 'description', 'start_time')}
             onSubmit={this.onSubmit}
           />
         </div>
