@@ -2,6 +2,7 @@ import React from 'react';
 import BarsDisplay from '../bars/BarsDisplay';
 import { connect } from 'react-redux';
 import { fetchCrawl, fetchLocations, deleteLocation } from '../../actions';
+import dateFormat from 'dateformat';
 import './Crawl.css';
 
 class CrawlShow extends React.Component {
@@ -94,6 +95,7 @@ class CrawlShow extends React.Component {
     if (!this.props.crawl) {
       return <div className="ui container screen-container">Loading...</div>;
     }
+    const date = new Date(this.props.crawl.start_time);
     if (
       this.props.isSignedIn &&
       this.props.userId === this.props.crawl.userId
@@ -101,6 +103,7 @@ class CrawlShow extends React.Component {
       return (
         <div className="ui container screen-container">
           <h1>Pub Crawl Itinerary for {this.props.crawl.name}</h1>
+          <h3>{dateFormat(date, 'dddd, mmmm dS, yyyy, h:MM TT')}</h3>
           <div className="ui cards">{this.renderList()}</div>
           {this.renderBarsSearch()}
         </div>
@@ -109,6 +112,7 @@ class CrawlShow extends React.Component {
       return (
         <div className="ui container screen-container">
           <h1>Pub Crawl Itinerary for {this.props.crawl.name}</h1>
+          <h3>{dateFormat(date, 'dddd, mmmm dS, yyyy, h:MM TT')}</h3>
           <div className="ui cards">{this.renderList()}</div>
         </div>
       );
