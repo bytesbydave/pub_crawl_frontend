@@ -117,7 +117,7 @@ export const createCrawl = formValues => async (dispatch, getState) => {
   const id = response.data.id;
 
   dispatch({ type: CREATE_CRAWL, payload: response.data });
-  history.push(`/crawls/${id}/add_location`);
+  history.push(`/crawls/${id}/`);
 };
 
 export const editCrawl = (id, formValues) => async dispatch => {
