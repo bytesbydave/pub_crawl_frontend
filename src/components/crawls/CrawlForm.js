@@ -1,5 +1,12 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import DateTimePicker from 'react-widgets/lib/DateTimePicker';
+import Moment from 'moment';
+import momentLocalizer from 'react-widgets-moment';
+import 'react-widgets/dist/css/react-widgets.css';
+
+Moment.locale('en');
+momentLocalizer();
 
 class CrawlForm extends React.Component {
   renderError(meta) {
@@ -28,6 +35,21 @@ class CrawlForm extends React.Component {
     );
   };
 
+  renderDateTimePicker = ({ input: { onChange, value }, meta }) => {
+    const className = `field ${meta.error && meta.touched ? 'error' : ''}`;
+    return (
+      <div className={className}>
+        <label>Pick Date</label>
+        <DateTimePicker
+          onChange={onChange}
+          dropUp
+          min={new Date()}
+          value={!value ? null : new Date(value)}
+        />
+      </div>
+    );
+  };
+
   onSubmit = formValues => {
     this.props.onSubmit(formValues);
   };
@@ -50,7 +72,11 @@ class CrawlForm extends React.Component {
           label="Enter description"
           rows="5"
         />
-
+        <Field
+          name="start_time"
+          showTime={false}
+          component={this.renderDateTimePicker}
+        />
         <button className="ui button primary">Submit</button>
       </form>
     );
@@ -64,6 +90,9 @@ const validate = formValues => {
   }
   if (!formValues.description) {
     errors.description = 'You must enter a description';
+  }
+  if (!formValues.start_time) {
+    errors.start_time = 'You must enter a date';
   }
   return errors;
 };
