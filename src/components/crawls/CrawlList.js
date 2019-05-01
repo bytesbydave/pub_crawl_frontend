@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchCrawls } from '../../actions';
+import dateFormat from 'dateformat';
 import './Crawl.css';
 
 class CrawlList extends React.Component {
@@ -29,6 +30,7 @@ class CrawlList extends React.Component {
 
   renderList() {
     return this.props.crawls.map(crawl => {
+      const date = new Date(crawl.start_time);
       return (
         <div className="card" key={crawl.id}>
           <Link to={`/crawls/${crawl.id}`} className="image crawl-image">
@@ -42,7 +44,7 @@ class CrawlList extends React.Component {
               </Link>
             </div>
             <div className="meta">
-              <p>Friends</p>
+              <p>{dateFormat(date, 'dddd, mmmm dS, yyyy, h:MM TT')}</p>
             </div>
             <div className="description">{crawl.description}</div>
           </div>
