@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/crawlr/static/css/main.4b6d253e.chunk.css",
+    "main.js": "/crawlr/static/js/main.a9d78902.chunk.js",
+    "main.js.map": "/crawlr/static/js/main.a9d78902.chunk.js.map",
+    "runtime~main.js": "/crawlr/static/js/runtime~main.4f95b2c3.js",
+    "runtime~main.js.map": "/crawlr/static/js/runtime~main.4f95b2c3.js.map",
+    "static/css/2.b805901c.chunk.css": "/crawlr/static/css/2.b805901c.chunk.css",
+    "static/js/2.5e899a64.chunk.js": "/crawlr/static/js/2.5e899a64.chunk.js",
+    "static/js/2.5e899a64.chunk.js.map": "/crawlr/static/js/2.5e899a64.chunk.js.map",
+    "index.html": "/crawlr/index.html",
+    "precache-manifest.232151f55e12c6502f1530b7d72a5351.js": "/crawlr/precache-manifest.232151f55e12c6502f1530b7d72a5351.js",
+    "service-worker.js": "/crawlr/service-worker.js",
+    "static/css/2.b805901c.chunk.css.map": "/crawlr/static/css/2.b805901c.chunk.css.map",
+    "static/css/main.4b6d253e.chunk.css.map": "/crawlr/static/css/main.4b6d253e.chunk.css.map",
+    "static/media/semantic.min.css": "/crawlr/static/media/outline-icons.ef60a4f6.woff",
+    "static/media/react-widgets.css": "/crawlr/static/media/rw-widgets.eceddf47.ttf"
+  }
+}
