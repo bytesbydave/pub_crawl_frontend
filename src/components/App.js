@@ -29,7 +29,6 @@ const App = () => {
             <Route path="/crawls/delete/:id" component={CrawlDelete} />
             <Route path="/crawls/:id" exact component={CrawlShow} />
 
-
             <Route path="/streams" exact component={StreamList} />
             <Route path="/streams/new" component={StreamCreate} />
             <Route path="/streams/edit/:id" component={StreamEdit} />
