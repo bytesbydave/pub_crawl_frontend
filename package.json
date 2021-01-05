@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://dvdlin214.github.io/crawlr",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "dateformat": "^3.0.3",
     "faker": "^4.1.0",
     "lodash": "^4.17.11",
